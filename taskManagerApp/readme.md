@@ -49,7 +49,8 @@ Open:
 Add:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/taskmanager
-spring.datasource.username=postgres
+#spring.datasource.username=postgres
+spring.datasource.username=shiyinli
 spring.datasource.password=
 
 spring.jpa.hibernate.ddl-auto=update
