@@ -71,3 +71,37 @@ mvn spring-boot:run
 Öffne im Browser:  
 http://localhost:8080  
 Es wird noch nichts angezeigt — das ist normal.
+
+# 6
+```
+taskmanager
+ └─ src/main/java/com/example/taskmanager
+      ├─ TaskmanagerApplication.java
+      ├─ entity
+      ├─ repository
+      ├─ service
+      └─ controller
+```
+Das ist eine Standard-Spring-Boot Architektur.
+# 7. task entity erstellen
+```
+entity/Task.java
+```
+```
+@Entity  -> Tabelle in DB
+@Table   -> Tabellenname
+@Id      -> Primary Key
+@GeneratedValue -> Auto increment
+```
+# 8. repository erstellen
+Spring Boot generiert automatisch:
+
+save()
+
+findAll()
+
+deleteById()
+
+findById()
+
+Du musst keinen SQL-Code schreiben.
