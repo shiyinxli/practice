@@ -1,3 +1,14 @@
+# basis
+backend has three main layers:
+```plain text
+Client (browser / frontend)
+↓
+Controller  ← handles HTTP (API)
+↓
+Repository ← talks to database
+↓
+Database (PostgreSQL)
+````
 # 1
 Gehe auf:
 https://start.spring.io
@@ -105,3 +116,20 @@ deleteById()
 findById()
 
 Du musst keinen SQL-Code schreiben.
+# 9. controller erstellen
+```
+controller/TaskController.java
+```
+server neu starten:
+mvn spring-boot:run
+# 10. test
+create tasks:
+```bash
+curl -X POST http://localhost:8080/tasks \
+-H "Content-Type: application/json" \
+-d '{"title":"Learn Spring Boot","completed":false}'
+```
+get tasks:
+```bash
+curl http://localhost:8080/tasks
+```
