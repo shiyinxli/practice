@@ -9,6 +9,20 @@ Repository ← talks to database
 ↓
 Database (PostgreSQL)
 ````
+```plain text
+TaskRepository
+   ↓
+Spring Data JPA
+   ↓
+Hibernate (ORM)
+   ↓
+SQL
+```
+```plain text
+Request → Controller → Repository → JPA/Hibernate → Database
+                                         ↓
+Response ← JSON ← Controller ← Java Objects
+```
 # 1
 Gehe auf:
 https://start.spring.io
