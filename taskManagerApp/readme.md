@@ -168,3 +168,21 @@ keep backend running in another terminal:
 ```bash
 mvn spring-boot:run
 ```
+## 3. clean react project
+open: frontend/src/App.js
+## 4. fix CORS error
+it will likely get an error: `CORS policy blocked`
+open controller:
+```java
+@RestController
+@RestMapping("/tasks")
+```
+add:
+```java
+@CrossOrigin(origins = "http://localhost:3000")
+```
+Now:
+
+Backend running → localhost:8080
+
+Frontend running → localhost:3000
