@@ -8,6 +8,8 @@ Controller  ← handles HTTP (API)
 Repository ← talks to database
 ↓
 Database (PostgreSQL)
+
+later change to Controller → Service → Repository 
 ````
 ```plain text
 TaskRepository
