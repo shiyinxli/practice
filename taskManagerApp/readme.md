@@ -149,3 +149,22 @@ get tasks:
 ```bash
 curl http://localhost:8080/tasks
 ```
+
+# Front end
+## 1.create React app
+go to your project root
+run:
+```bash
+npx create-react-app frontend
+```
+## 2. start frontend
+```bash
+cd frontend
+npm start
+```
+open: http://localhost:3000
+
+keep backend running in another terminal:
+```bash
+mvn spring-boot:run
+```

@@ -17,7 +17,7 @@ public class TaskService {
         return taskRepository.findAll();
     }
     public Task createTask(Task task){
-        if(task.getTitle() == null || task.getTitle().isEmpty()){
+        if(task.getTitle() == null || task.getTitle().trim().isEmpty()){
             throw new RuntimeException("Title cannot be empty");
         }
         return taskRepository.save(task);
