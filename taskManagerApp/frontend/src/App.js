@@ -39,6 +39,25 @@ function App() {
     });
   };
 
+  const toggleTask = (task) => {
+    fetch(`http://localhost:8080/tasks/${task.id}`,{
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        completed: !task.completed
+      })
+    })
+    .then(res => res.json())
+    .then(updatedTask => {
+      setTasks(tasks.map(t =>
+        t.id === task.id ? updatedTask : t
+      ));
+    });
+  };
+
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>Task Manager</h1>
@@ -53,8 +72,15 @@ function App() {
       <ul>
         {tasks.map(task => (
           <li key={task.id}>
-            {task.title}
-            <button onClick={() => deleteTask(task.id)}>❌</button>
+           <input
+            type="checkbox"
+            checked = {task.completed}
+            onChange = {() => toggleTask(task)}
+            />
+            <span style={{textDecoration: task.completed ? "line-through": "none"}}>
+              {task.title}
+            </span>
+            <button onClick = {() => deleteTask(task.id)}>❌</button>
           </li>
         ))}
       </ul>
