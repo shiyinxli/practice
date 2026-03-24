@@ -221,3 +221,35 @@ module.exports = {
 };
 ```
 5. npm start
+
+# Authentication
+```
+Frontend → login → Backend
+                ↓
+             returns JWT
+                ↓
+Frontend stores token
+                ↓
+Frontend sends token with every request
+                ↓
+Backend verifies token
+```
+
+## backend add dependency
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.5</version>
+</dependency>
+```
+## create user entity and userRepository
+## register endpoint
+## login logic
+## frontend login
+## send token with requests
