@@ -1,5 +1,6 @@
 package com.example.taskmanager.controller;
 
+import com.example.taskmanager.config.JwtUtil;
 import com.example.taskmanager.entity.User;
 import com.example.taskmanager.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,6 @@ public class AuthController {
             throw new RuntimeException("Invalid password");
         }
 
-        return "login success";
+        return JwtUtil.generateToken(user.getUsername());
     }
 }
