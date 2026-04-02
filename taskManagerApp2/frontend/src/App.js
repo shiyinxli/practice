@@ -31,9 +31,11 @@ function App() {
   };
 
   // auth header
-  const authHeader = () => ({
-    Authorization: "Bearer " + localStorage.getItem("token"),
-  });
+  const authHeader = () => {
+    // Authorization: "Bearer " + localStorage.getItem("token"),
+    const token = localStorage.getItem("token");
+    return token ? {Authorization: "Bearer "+token } : {};
+  };
 
   // fetch tasks
   useEffect(() => {

@@ -253,3 +253,9 @@ Backend verifies token
 ## login logic
 ## frontend login
 ## send token with requests
+## create user
+```bash
+curl -X POST http://localhost:8080/auth/register \
+-H "Content-Type: application/json" \
+-d '{"username":"test","password":"123"}'
+```
