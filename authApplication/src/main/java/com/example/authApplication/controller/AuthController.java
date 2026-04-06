@@ -1,5 +1,6 @@
 package com.example.authApplication.controller;
 
+import com.example.authApplication.config.JwtUtil;
 import com.example.authApplication.dto.AuthRequest;
 import com.example.authApplication.entity.User;
 import com.example.authApplication.repository.UserRepository;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    @Autowired
+    private JwtUtil jwtUtil;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -36,7 +39,8 @@ public class AuthController {
         if(!passwordEncoder.matches(request.password, user.getPassword())){
             throw new RuntimeException("Invalid password");
         }
-        return "Login success";
+        String token = jwtUtil.generateToken(user.getEmail());
+        return token;
     }
 
 }
