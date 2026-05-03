@@ -106,3 +106,68 @@ in real applications, the frontend talks to a backend via APIs, and many vulnera
 - you should see a list of requests, click on one request, look at Headers (URL, Method(GET/POST)), response (JSON data returned).
 - if an API is a get request like `/rest/products/search?q=apple`:
     - you can copy it in the DevTools and paste it in the browser and mortify it. like `/rest/products/search?q=' OR 1=1--`
+# test for broken access control
+a real vulnerability **broken access control**
+this is one of the most critical vulnerabilities in real system
+example: normal user should not access admin data, but API allows it anyway.
+one of the api found in last step: `/api/Quantitys/`
+"should a normal user be allowed to see al product inventory?"
+try log in/out and open broswer and go into 
+`http://localhost:3000/api/Quantitys/`
+we can see the authentication is not actually enforced.
+## why this is serious
+This endpoint exposes:
+- product inventory (quantity)
+- business rules (limitPerUser)
+An attacker could:
+- monitor stock levels
+- understand purchase limits
+- prepare further attacks
+# test if you can modify data
+open the basket in the UI and click add a fruit.
+in DevTools -> Network
+find sth with PUT method, e.g. `/api/BasketItems/1`
+one should see something like:
+```json
+{
+    "quantity": 1
+}
+```
+then   
+1. right-click the request
+2. click Copy -> Copy as fetch (or cURL)
+
+paste it in the console  
+then  
+change the quantity, e.g.
+```JSON
+{
+    "quantity": 6
+}
+```
+press enter and refresh page, you should see the quantity is changed to 6.
+## core difference: POST vs PUT
+**POST = create something new**
+```http
+POST /api/BasketItems
+```
+meaning: create a new item in basket
+body:
+```JSON
+{
+    "ProductId": 1,
+    "BasketID": 1,
+    "quantity": 1
+}
+```
+**PUT = update existing thing**
+```http
+PUT /api/BasketItems/23
+```
+meaning: update item with ID=23
+body:
+```JSON
+{
+    "quantity": 6
+}
+```
